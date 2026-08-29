@@ -7,6 +7,11 @@ export const apiCall = async (endpoint, method = 'GET', body = null) => {
     'Content-Type': 'application/json'
   };
 
+  const token = localStorage.getItem('token');
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+
   const config = {
     method,
     headers,

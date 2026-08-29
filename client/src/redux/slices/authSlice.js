@@ -7,6 +7,9 @@ export const registerUser = createAsyncThunk(
   async (userData, { rejectWithValue }) => {
     try {
       const data = await apiCall('/auth/register', 'POST', userData);
+      if (data.token) {
+        localStorage.setItem('token', data.token);
+      }
       return data.data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -19,6 +22,9 @@ export const loginUser = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       const data = await apiCall('/auth/login', 'POST', credentials);
+      if (data.token) {
+        localStorage.setItem('token', data.token);
+      }
       return data.data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -31,8 +37,10 @@ export const logoutUser = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       await apiCall('/auth/logout', 'POST');
+      localStorage.removeItem('token');
       return true;
     } catch (error) {
+      localStorage.removeItem('token');
       return rejectWithValue(error.message);
     }
   }
