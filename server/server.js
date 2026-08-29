@@ -51,6 +51,15 @@ app.use(cookieParser());
 // Passport Middleware Initialization
 app.use(passport.initialize());
 
+// Root Welcome Endpoint
+app.get('/', (req, res) => {
+  res.status(200).json({
+    message: 'Welcome to Usama Mobiles Express REST API',
+    health: '/api/health',
+    status: 'Running'
+  });
+});
+
 // API Health Check
 app.get('/api/health', (req, res) => {
   res.status(200).json({
