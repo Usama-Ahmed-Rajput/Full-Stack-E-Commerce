@@ -32,12 +32,16 @@ const allowedOrigins = [
 app.use(
   cors({
     origin: function (origin, callback) {
-      // allow requests with no origin (like mobile apps or curl)
       if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV !== 'production') {
+      if (
+        origin.includes('vercel.app') ||
+        origin.includes('localhost') ||
+        origin.includes('127.0.0.1') ||
+        allowedOrigins.indexOf(origin) !== -1
+      ) {
         return callback(null, true);
       }
-      return callback(new Error('CORS policy error: Origin not allowed'));
+      return callback(null, true);
     },
     credentials: true
   })
