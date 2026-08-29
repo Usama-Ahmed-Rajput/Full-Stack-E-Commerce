@@ -1,0 +1,12 @@
+{
+  "name": "usama-mobiles-fullstack",
+  "version": "1.0.0",
+  "description": "Usama Mobiles - Full-Stack Mobile & Accessories E-Commerce Web Application (Academic Assignment)",
+  "scripts": {
+    "install-all": "npm install && cd server && npm install && cd ../client && npm install",
+    "seed": "cd server && npm run seed",
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm run dev",
+    "build:client": "cd client && npm run build"
+  }
+}
